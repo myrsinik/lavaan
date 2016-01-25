@@ -276,25 +276,25 @@ estimator.PML <- function(Sigma.hat = NULL,    # model-based var/cov/cor
         ##Fmin <- sum( prop*log(prop/PI) )
         Fmin <- sum( freq * log(prop/PI) ) # to avoid 'N'
         if(missing=="available_cases"){
- uniPI <- univariateExpProbVec(TH=TH, th.idx=th.idx)
- 
- #shortcuts
- unifreq    <- lavcache$unifreq
- uninobs    <- lavcache$uninobs
- uniweights <- lavcache$uniweights 
-  
- logl <- logl + sum(uniweights * log(uniPI))
- 
- uniprop <- unifreq / uninobs
- # remove zero props 
- uni.zero.idx <- which(uni_prop == 0.0)
- if(length(uni.zero.idx) > 0L) {
-    uniprop    <- uniprop[-uni.zero.idx]
-    uniPI      <- uniPI[-uni.zero.idx]
-    uniweights <- uniweights[-uni.zero.idx]
- } 
- Fmin <- Fmin + sum(uniweights * log(uniprop/uniPI))
-}
+             uniPI <- univariateExpProbVec(TH=TH, th.idx=th.idx)
+             
+             #shortcuts
+             unifreq    <- lavcache$unifreq
+             uninobs    <- lavcache$uninobs
+             uniweights <- lavcache$uniweights 
+              
+             logl <- logl + sum(uniweights * log(uniPI))
+             
+             uniprop <- unifreq / uninobs
+             # remove zero props 
+             uni.zero.idx <- which(uni_prop == 0.0)
+             if(length(uni.zero.idx) > 0L) {
+                uniprop    <- uniprop[-uni.zero.idx]
+                uniPI      <- uniPI[-uni.zero.idx]
+                uniweights <- uniweights[-uni.zero.idx]
+             } 
+             Fmin <- Fmin + sum(uniweights * log(uniprop/uniPI))
+        }
 
     } else {
         # # order! first i, then j, lav_matrix_vec(table)!
